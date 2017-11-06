@@ -31,8 +31,6 @@ class Statek():
         check that ship can shot again and if it is posible do it
         check that ship can burn and if destroy ship
         """
-        print str(self.skrot_statku) + " atakuje " + str(ship.skrot_statku)
-
         self.add_damage(ship)
 
         if self.can_shot_more(ship):
@@ -44,6 +42,7 @@ class Statek():
 
         if self.punkty_strukturalne <= 0:
             self.live = False
+
 
 
 
