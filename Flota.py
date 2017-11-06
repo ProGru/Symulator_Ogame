@@ -12,7 +12,7 @@ class Flota():
         :param file_name: file where flota is
         :return: ship list with all ships from
         """
-        wszystko_z_pliku = open(file_name).readlines()[1:]
+        wszystko_z_pliku = open(file_name).readlines()
         statki_w_flocie = []
         ship_list =[]
 
@@ -27,4 +27,8 @@ class Flota():
 
     def __str__(self):
         return str(self.ship_list)
+
+    def __len__(self):
+        return str(len(self.ship_list))
+
 

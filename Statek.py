@@ -81,7 +81,7 @@ class Statek():
         :return True or False:
         """
 
-        if self.punkty_strukturalne < self.get_info_ship(self.skrot_statku)[1] * 0.3:
+        if self.punkty_strukturalne < self.get_info_ship(self.skrot_statku)[1] * 0.7:
             chance_explosion = 1.0 - (float(self.punkty_strukturalne) / self.get_info_ship(self.skrot_statku)[1])
             chance = random.uniform(0,1)
             return chance<chance_explosion

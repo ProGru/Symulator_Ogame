@@ -64,10 +64,13 @@ class Symulacja():
                 wybrany = random.choice(self.flota2)
                 wybrany.do_atack(i)
 
+
+
         for i in self.flota2:
-            if len(self.flota1) >0:
+            if len(self.flota1)>0:
                 wybrany = random.choice(self.flota1)
                 wybrany.do_atack(i)
+
 
         niezniszczona_flota1 = []
         niezniszczona_flota2 = []
@@ -90,7 +93,10 @@ class Symulacja():
 symulacja = Symulacja("flota1","flota2")
 
 przed = time.time()
-print symulacja.usredniony_wynik_symulacji(100)
+print symulacja.usredniony_wynik_symulacji(1)
 po = time.time()
 
 print po-przed
+
+print len(symulacja.flota1)
+print len(symulacja.flota2)
