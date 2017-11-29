@@ -4,11 +4,17 @@ import time
 
 class Symulacja():
 
-    def __init__(self,flota1,flota2):
-        self.file1 = flota1
-        self.file2 = flota2
-        self.flota1 = Flota(flota1).zaladuj_flote(flota1)
-        self.flota2 = Flota(flota2).zaladuj_flote(flota2)
+    def __init__(self):
+        self.flota1 = Flota()
+        self.flota2 = Flota()
+
+    def zaladuj_floty_lista(self,lista1,lista2):
+        self.flota1.zaladuj_flote_lista(lista1)
+        self.flota2.zaladuj_flote_lista(lista2)
+
+    def zaladuj_floty_plik(self,file1,file2):
+        self.flota1.zaladuj_flote_plik(file1)
+        self.flota2.zaladuj_flote_plik(file2)
 
     def wykonaj_symulacje(self, rundy):
         """
@@ -38,7 +44,8 @@ class Symulacja():
         remis = 0
 
         for i in range(0,ile_symulacji):
-            self.__init__(self.file1,self.file2)
+            self.flota1.reset()
+            self.flota2.reset()
             wynik = self.wykonaj_symulacje(6)
             if wynik:
                 flota1 += 1
@@ -61,15 +68,21 @@ class Symulacja():
 
         for i in self.flota1:
             if len(self.flota2)>0:
-                wybrany = random.choice(self.flota2)
+                wybrany = random.choice(self.flota2.ship_list)
                 wybrany.do_atack(i)
-
-
+                while wybrany.can_shot_more(i):
+                    wybrany = random.choice(self.flota2.ship_list)
+                    wybrany.do_atack(i)
 
         for i in self.flota2:
             if len(self.flota1)>0:
-                wybrany = random.choice(self.flota1)
+                wybrany = random.choice(self.flota1.ship_list)
                 wybrany.do_atack(i)
+                while wybrany.can_shot_more(i):
+                    wybrany = random.choice(self.flota2.ship_list)
+                    wybrany.do_atack(i)
+
+
 
 
         niezniszczona_flota1 = []
@@ -79,19 +92,20 @@ class Symulacja():
             if i.is_live():
                 i.odnow_oslone()
                 niezniszczona_flota1.append(i)
-        self.flota1 = niezniszczona_flota1
+        self.flota1.ship_list = niezniszczona_flota1
 
         for i in self.flota2:
             if i.is_live():
                 i.odnow_oslone()
                 niezniszczona_flota2.append(i)
-        self.flota2 = niezniszczona_flota2
+        self.flota2.ship_list = niezniszczona_flota2
 
 
 
-
-symulacja = Symulacja("flota1","flota2")
-
+"""
+symulacja = Symulacja()
+#symulacja.zaladuj_floty_plik("flota1","flota2")
+symulacja.zaladuj_floty_lista([("mt", 120000),("ow",10)],[("ow",1000)])
 przed = time.time()
 print symulacja.usredniony_wynik_symulacji(1)
 po = time.time()
@@ -100,3 +114,4 @@ print po-przed
 
 print len(symulacja.flota1)
 print len(symulacja.flota2)
+"""

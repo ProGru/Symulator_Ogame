@@ -33,8 +33,9 @@ class Statek():
         """
         self.add_damage(ship)
 
-        if self.can_shot_more(ship):
-            self.add_damage(ship)
+
+        #if self.can_shot_more(ship):
+            #self.add_damage(ship)
 
         if self.will_burn():
             self.punkty_strukturalne = 0
@@ -68,6 +69,7 @@ class Statek():
         :return True or False:
         """
         chance = 1 - (1.0/self.find_szybkie_dzialo(ship))
+        print chance
         if chance>0:
             chance_shot = random.uniform(0,1)
             return chance >= chance_shot
