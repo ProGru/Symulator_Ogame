@@ -1,49 +1,52 @@
-from Statek import Statek
+from Ship import Ship
 
 
 class Flota():
 
     def __init__(self):
         self.ship_list = []
-        self.zapasowa_lista = []
+        self.backup_list = []
 
 
-    def zaladuj_flote_plik(self, file_name):
+    def load_flota_file(self, file_name):
         """
         :param file_name: file where flota is
-        :return: ship list with all ships from
+        :return: ship list with all ships from fille
         """
-        wszystko_z_pliku = open(file_name).readlines()
-        statki_w_flocie = []
+        everything_from_file = open(file_name).readlines()
+        ships_in_flota = []
         ship_list =[]
 
-        for i in wszystko_z_pliku:
-            statki_w_flocie.append(i.rsplit())
+        for i in everything_from_file:
+            ships_in_flota.append(i.rsplit())
 
-        for i in statki_w_flocie:
+        for i in ships_in_flota:
             for j in range(0,int(i[1])):
-                ship_list.append(Statek(i[0]))
+                ship_list.append(Ship(i[0]))
 
         self.ship_list = ship_list
-        self.zapasowa_lista = ship_list
+        self.backup_list = ship_list
 
-    def zaladuj_flote_lista(self, data):
+    def load_flota_list(self, data):
         """
-        przypisuje statki do floty
-        :param data: lista statkow do stworzenia np [("mt",100),("dt",1)]
-        :return: zwraca liste obiektow klasy Statek
+        create flota from ship list
+        :param data: list ships to create for example [("mt",100),("dt",1)]
+        :return: list with object class Ship
         """
         ship_list =[]
 
         for i in data:
             for j in range(0,i[1]):
-                ship_list.append(Statek(i[0]))
+                ship_list.append(Ship(i[0]))
 
         self.ship_list =  ship_list
-        self.zapasowa_lista = ship_list
+        self.backup_list = ship_list
 
     def reset(self):
-        self.ship_list = self.zapasowa_lista
+        """
+        reset ship list for example when old one is changed
+        """
+        self.ship_list = self.backup_list
 
 
     def __str__(self):
