@@ -11,7 +11,7 @@ class play():
         apply_wynik =apply(self.app).__call__()
 
         symulacja.zaladuj_floty_lista(apply_wynik[0],apply_wynik[1])
-        print symulacja.usredniony_wynik_symulacji(1)
+        app.infoBox("wynik", symulacja.usredniony_wynik_symulacji(1))
 
 
 class apply():
@@ -73,5 +73,6 @@ app.addLabelEntry("n2",wiersz + 11,kolumna2)
 app.addLabelEntry("gs2",wiersz + 12,kolumna2)
 app.addLabelEntry("p2",wiersz + 13,kolumna2)
 app.addButtons(["apply","play"],[apply(app),play(app)],wiersz + 14,kolumna1)
+
 
 app.go()
